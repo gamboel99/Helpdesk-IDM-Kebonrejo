@@ -1,18 +1,20 @@
-# Helpdesk IDM Kebonrejo (Offline) – v2
+Helpdesk IDM Kebonrejo v4 — Full (Form + Dashboard)
 
-Pembaharuan:
-- **Peta (Leaflet)**: pratinjau titik koordinat. Klik pada peta untuk mengubah lat/lng. (Memerlukan internet untuk tiles)
-- **Validasi**: penandaan kolom wajib & kesalahan (mis. NIK harus 16 digit).
-- **Skoring sederhana**: skor per dimensi (Sosial, Ekonomi, Lingkungan) + total (0–100). *Catatan: indikatif, bukan penetapan resmi Kemendesa.*
-- **Sheet Skoring** di Excel berisi ringkasan aturan & bobot (dapat disesuaikan di `script.js` pada variabel `weights`).
+Isi paket:
+- index.html (Form pengisian mandiri)
+- dashboard.html (Dashboard rekap & visualisasi)
+- style.css
+- script.js (logika form, scoring, penyimpanan)
+- dashboard.js (logika dashboard, chart, peta, ekspor)
+- README.md (panduan singkat)
 
-## Tetap Offline
-- Aplikasi dapat berjalan murni offline. Peta akan kosong saat offline—ini normal. Fitur form & ekspor Excel tetap berfungsi.
+Cara pakai (offline):
+1. Ekstrak folder, buka index.html di browser (Chrome/Edge/Firefox).
+2. Warga isi form → tekan "Submit & Hitung IDM". Hasil skor & kategori muncul seketika.
+3. Buka dashboard.html untuk melihat rekap per Dusun/RW/RT, grafik, dan peta.
+4. Klik "Download Excel (rekap lengkap)" untuk mendapat workbook dengan sheet Data_KK, Rekap_RT, Rekap_RW, Rekap_Dusun, Rekap_Desa, Panduan.
 
-## Cara Pakai
-1. Buka `index.html`, klik **Ambil Koordinat** atau klik peta untuk set lokasi.
-2. Isi form → **Tambahkan ke Tabel** (multi entri).
-3. **Download Excel** untuk menyimpan semua data, termasuk skor.
+Deploy ke GitHub & Vercel:
+- Upload semua file ke repo GitHub, lalu import project ke Vercel sebagai static site (Other/Static).
 
-## Penafian
-- **Skoring** di versi ini adalah pendekatan praktis berbasis aturan umum indikator; untuk pelaporan resmi, sesuaikan bobot & aturan dengan juknis Kemendesa terbaru.
+MIT © 2025 Pemerintah Desa Kebon Rejo
