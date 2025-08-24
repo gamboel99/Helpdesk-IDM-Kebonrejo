@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Helpdesk IDM Kebonrejo</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Helpdesk IDM Kebonrejo</h1>
+      <p>Form Penggalian Data Indeks Desa Membangun (IDM) - Desa Kebon Rejo, Kec. Kepung, Kab. Kediri</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Identitas Responden / Rumah Tangga</h2>
+      <form id="idmForm">
+        <div class="grid-2">
+          <label>RT/RW
+            <input type="text" name="rt_rw" placeholder="contoh: 02/04" required />
+          </label>
+          <label>Dusun
+            <input type="text" name="dusun" placeholder="Nama dusun" required />
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label>Nama Kepala Keluarga
+            <input type="text" name="nama_kk" required />
+          </label>
+          <label>NIK (opsional)
+            <input type="text" name="nik" />
+          </label>
+        </div>
+
+        <div class="grid-3">
+          <label>Jumlah Anggota Keluarga
+            <input type="number" name="jml_anggota" min="1" required />
+          </label>
+          <label>No. HP (opsional)
+            <input type="tel" name="hp" />
+          </label>
+          <label>Nama Berkas Foto (opsional)
+            <input type="text" name="foto_rumah" placeholder="mis: IMG_1234.jpg" />
+          </label>
+        </div>
+
+        <fieldset>
+          <legend>Lokasi (GPS)</legend>
+          <div class="grid-3">
+            <label>Latitude
+              <input type="text" name="lat" id="lat" readonly />
+            </label>
+            <label>Longitude
+              <input type="text" name="lng" id="lng" readonly />
+            </label>
+            <label>Akurasi (meter)
+              <input type="text" name="acc" id="acc" readonly />
+            </label>
+          </div>
+          <div class="row">
+            <button type="button" id="btnGPS">Ambil Koordinat</button>
+            <small class="muted">Jika GPS ditolak, isi manual pada kolom di atas.</small>
+          </div>
+        </fieldset>
+
+        <hr/>
+
+        <h2>Ketahanan Sosial</h2>
+        <fieldset>
+          <legend>Pendidikan</legend>
+          <div class="grid-3">
+            <label>Anak usia 7–18 terdaftar sekolah?
+              <select name="pend_daftar" required>
+                <option value="">Pilih</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+            <label>Jumlah anak usia 7–18
+              <input type="number" name="pend_jml_anak" min="0" value="0" />
+            </label>
+            <label>Jarak ke SD/MI terdekat (km)
+              <input type="number" step="0.01" name="pend_jarak_sd" min="0" value="0" />
+            </label>
+          </div>
+          <div class="grid-3">
+            <label>PAUD tersedia di desa?
+              <select name="pend_paud" required>
+                <option value="">Pilih</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+            <label>SMP/MTs tersedia di desa?
+              <select name="pend_smp" required>
+                <option value="">Pilih</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+            <label>SMA/SMK/MA tersedia di kecamatan?
+              <select name="pend_sma" required>
+                <option value="">Pilih</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Kesehatan</legend>
+          <div class="grid-3">
+            <label>Terdaftar JKN/KIS?
+              <select name="kes_jkn" required>
+                <option value="">Pilih</option>
+                <option>Semua</option>
+                <option>Sebagian</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+            <label>Posyandu terjangkau (&lt;= 3 km)?
+              <select name="kes_posyandu" required>
+                <option value="">Pilih</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+            <label>Jarak Puskesmas (km)
+              <input type="number" step="0.01" name="kes_jarak_pkm" min="0" value="0" />
+            </label>
+          </div>
+          <div class="grid-3">
+            <label>Kader kesehatan aktif?
+              <select name="kes_kader" required>
+                <option value="">Pilih</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+            <label>Imunisasi dasar lengkap balita?
+              <select name="kes_imunisasi" required>
+                <option value="">Pilih</option>
+                <option>&gt;= 95%</option>
+                <option>70–94%</option>
+                <option>&lt; 70%</option>
+                <option>Tidak ada balita</option>
+              </select>
+            </label>
+            <label>Fasilitas kesehatan rujukan ada (&lt;= 10 km)?
+              <select name="kes_rujukan" required>
+                <option value="">Pilih</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Utilitas Dasar</legend>
+          <div class="grid-3">
+            <label>Akses air minum layak
+              <select name="util_air" required>
+                <option value="">Pilih</option>
+                <option>Pipa/PDAM</option>
+                <option>Sumur terlindungi</option>
+                <option>Mata air terlindungi</option>
+                <option>Air kemasan/isi ulang</option>
+                <option>Tidak layak/permukaan</option>
+              </select>
+            </label>
+            <label>Sanitasi layak
+              <select name="util_sanitasi" required>
+                <option value="">Pilih</option>
+                <option>Jamban leher angsa + septic tank</option>
+                <option>Jamban cemplung/sejenis</option>
+                <option>Tidak ada jamban</option>
+              </select>
+            </label>
+            <label>Akses listrik
+              <select name="util_listrik" required>
+                <option value="">Pilih</option>
+                <option>PLN &gt;= 900 VA</option>
+                <option>PLN &lt; 900 VA</option>
+                <option>Non-PLN</option>
+                <option>Tidak ada</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Modal Sosial</legend>
+          <div class="grid-3">
+            <label>Aktif gotong royong
+              <select name="ms_goro" required>
+                <option value="">Pilih</option>
+                <option>Sering</option>
+                <option>Jarang</option>
+                <option>Tidak pernah</option>
+              </select>
+            </label>
+            <label>Partisipasi Musdes setahun terakhir
+              <select name="ms_musdes" required>
+                <option value="">Pilih</option>
+                <option>Pernah</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+            <label>Keanggotaan kelompok (tani/PKK/karang taruna)
+              <select name="ms_kelompok" required>
+                <option value="">Pilih</option>
+                <option>&gt;= 1 anggota aktif</option>
+                <option>Tidak ada</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <hr/>
+
+        <h2>Ketahanan Ekonomi</h2>
+        <fieldset>
+          <legend>Keragaman Produksi</legend>
+          <div class="grid-3">
+            <label>Sumber penghasilan utama
+              <select name="eko_sumber">
+                <option value="">Pilih</option>
+                <option>Pertanian</option>
+                <option>Peternakan</option>
+                <option>Perikanan</option>
+                <option>Perdagangan</option>
+                <option>Jasa</option>
+                <option>Industri rumahan</option>
+                <option>Lainnya</option>
+              </select>
+            </label>
+            <label>Jumlah jenis usaha/komoditas
+              <input type="number" name="eko_jml_usaha" min="0" value="0" />
+            </label>
+            <label>Aset/alat produksi memadai
+              <select name="eko_aset">
+                <option value="">Pilih</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Akses Pasar & Logistik</legend>
+          <div class="grid-3">
+            <label>Jarak ke pasar terdekat (km)
+              <input type="number" step="0.01" name="eko_jarak_pasar" min="0" value="0" />
+            </label>
+            <label>Kondisi jalan ke pasar
+              <select name="eko_jalan">
+                <option value="">Pilih</option>
+                <option>Baik</option>
+                <option>Sedang</option>
+                <option>Rusak</option>
+              </select>
+            </label>
+            <label>Ada akses logistik (ojol/kargo)
+              <select name="eko_logistik">
+                <option value="">Pilih</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Akses Lembaga Keuangan</legend>
+          <div class="grid-3">
+            <label>Memiliki rekening bank/e-wallet
+              <select name="eko_rekening">
+                <option value="">Pilih</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+            <label>Akses ke kredit formal (bank/koperasi)
+              <select name="eko_kredit">
+                <option value="">Pilih</option>
+                <option>Pernah</option>
+                <option>Tidak pernah</option>
+              </select>
+            </label>
+            <label>Keanggotaan koperasi/kelompok usaha
+              <select name="eko_koperasi">
+                <option value="">Pilih</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <hr/>
+
+        <h2>Ketahanan Lingkungan / Ekologi</h2>
+        <fieldset>
+          <legend>Kualitas Lingkungan</legend>
+          <div class="grid-3">
+            <label>Pengelolaan sampah rumah tangga
+              <select name="ling_sampah">
+                <option value="">Pilih</option>
+                <option>Terpilah & diangkut</option>
+                <option>Dibakar/dibuang sembarang</option>
+                <option>Dikelola mandiri (kompos/dll)</option>
+              </select>
+            </label>
+            <label>Pengolahan air limbah domestik (IPAL/Septic baik)
+              <select name="ling_airlimbah">
+                <option value="">Pilih</option>
+                <option>Ada & berfungsi</option>
+                <option>Tidak ada / tidak berfungsi</option>
+              </select>
+            </label>
+            <label>Ruang terbuka/vegetasi sekitar rumah
+              <select name="ling_rth">
+                <option value="">Pilih</option>
+                <option>Memadai</option>
+                <option>Kurang</option>
+                <option>Tidak ada</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Potensi & Tanggap Bencana</legend>
+          <div class="grid-3">
+            <label>Risiko bencana dominan
+              <select name="ling_bencana">
+                <option value="">Pilih</option>
+                <option>Banjir</option>
+                <option>Longsor</option>
+                <option>Kekeringan</option>
+                <option>Gempa</option>
+                <option>Erupsi</option>
+                <option>Angin kencang</option>
+                <option>Lainnya/Tidak ada</option>
+              </select>
+            </label>
+            <label>Riwayat bencana 5 tahun terakhir
+              <select name="ling_riwayat">
+                <option value="">Pilih</option>
+                <option>Sering (&gt;= 3x)</option>
+                <option>Pernah (1–2x)</option>
+                <option>Tidak pernah</option>
+              </select>
+            </label>
+            <label>Kesiapsiagaan (peta evakuasi/posko/simulasi)
+              <select name="ling_kesiap">
+                <option value="">Pilih</option>
+                <option>Ada & aktif</option>
+                <option>Ada tapi pasif</option>
+                <option>Tidak ada</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="button" id="btnAdd">Tambahkan ke Tabel</button>
+          <button type="reset" class="secondary">Reset Form</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Data Terkumpul</h2>
+      <div class="table-scroll">
+        <table id="dataTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="actions">
+        <button id="btnDownload">Download Excel</button>
+        <button id="btnClear" class="danger">Hapus Semua Data</button>
+      </div>
+      <small class="muted">Data sementara disimpan di peramban (localStorage) sampai Anda menghapusnya atau menutup tab.</small>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© 2025 Pemerintah Desa Kebon Rejo, Kec. Kepung, Kab. Kediri — Helpdesk IDM Kebonrejo (Offline)</small>
+    </div>
+  </footer>
+</body>
+</html>
