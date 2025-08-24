@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Helpdesk IDM Kebonrejo v4 — Dashboard</title>
+  <title>Dashboard — Helpdesk IDM Kebonrejo (Full)</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
@@ -14,42 +14,39 @@
 <body>
   <header class="site-header">
     <div class="container">
-      <h1>Dashboard — Helpdesk IDM Kebonrejo</h1>
-      <p>Ringkasan data & rekap per Dusun / RW / RT</p>
+      <h1>Dashboard — Helpdesk IDM Kebonrejo (Full 38)</h1>
+      <p>Rekap & visualisasi per Dusun / RW / RT</p>
       <nav class="topnav"><a href="index.html">Form</a> · <a href="dashboard.html">Dashboard</a></nav>
     </div>
   </header>
 
   <main class="container">
     <section class="card">
-      <h2>Ringkasan Cepat</h2>
+      <h2>Ringkasan</h2>
       <div class="grid-3">
         <div class="stat card"><h3 id="totalEntries">0</h3><p>Entri KK</p></div>
         <div class="stat card"><h3 id="uniqueDusun">0</h3><p>Dusun</p></div>
         <div class="stat card"><h3 id="uniqueRT">0</h3><p>RT/RW</p></div>
       </div>
-      <div class="actions" style="margin-top:12px">
-        <button id="btnExportAll">Download Excel (rekap lengkap)</button>
-        <button id="btnClearAll" class="danger">Hapus Semua Data</button>
-      </div>
+      <div class="actions"><button id="btnExportAll">Download Excel (rekap lengkap)</button> <button id="btnClearAll" class="danger">Hapus Semua Data</button></div>
     </section>
 
     <section class="card">
-      <h2>Distribusi Kategori (Desa)</h2>
+      <h2>Distribusi Kategori Desa</h2>
       <canvas id="chartCategory" height="120"></canvas>
     </section>
 
     <section class="card">
-      <h2>Per Dusun</h2>
+      <h2>Per Dusun / RW</h2>
       <div id="dusunList"></div>
     </section>
 
     <section class="card">
-      <h2>Map — Titik KK</h2>
+      <h2>Peta Titik KK</h2>
       <div id="mapDash" style="height:420px"></div>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container"><small>© 2025 Desa Kebon Rejo — Helpdesk IDM Kebonrejo v4</small></div></footer>
+  <footer class="site-footer"><div class="container"><small>© 2025 Desa Kebon Rejo — Helpdesk IDM Kebonrejo</small></div></footer>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Helpdesk IDM Kebonrejo v4 — Form</title>
+  <title>Helpdesk IDM Kebonrejo — Full 38 Indikator</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
@@ -14,200 +14,200 @@
 <body>
   <header class="site-header">
     <div class="container">
-      <h1>Helpdesk IDM Kebonrejo <span class="tag">v4 — Full (Form & Dashboard)</span></h1>
-      <p>Form pengisian mandiri berbasis KK. Setelah submit, sistem hitung skor & kategori; data otomatis muncul di dashboard.</p>
+      <h1>Helpdesk IDM Kebonrejo <span class="tag">Full 38 Indikator</span></h1>
+      <p>Form pengisian inventaris (pilih kondisi nyata) — sistem otomatis konversi ke skor & kategori berdasar Juknis Kemendesa.</p>
       <nav class="topnav"><a href="index.html">Form</a> · <a href="dashboard.html">Dashboard</a></nav>
     </div>
   </header>
 
   <main class="container">
     <section class="card">
-      <h2>Form Pengisian Per KK (Mandiri)</h2>
+      <h2>Identitas Responden / Rumah Tangga</h2>
       <form id="idmForm" novalidate>
-        <div class="grid-2">
-          <label>Dusun
-            <input type="text" name="dusun" required placeholder="contoh: Krajan" />
-            <span class="err"></span>
-          </label>
-          <label>RT/RW
-            <input type="text" name="rt_rw" required placeholder="contoh: 02/04" />
-            <span class="err"></span>
-          </label>
-        </div>
 
         <div class="grid-3">
-          <label>Nama Kepala Keluarga
-            <input type="text" name="nama_kk" required />
-            <span class="err"></span>
-          </label>
-          <label>NIK (opsional)
-            <input type="text" name="nik" pattern="\d{16}" placeholder="16 digit" />
-            <span class="err"></span>
-          </label>
-          <label>Jumlah Anggota Keluarga
-            <input type="number" name="jml_anggota" min="1" required />
-            <span class="err"></span>
-          </label>
+          <label>Dusun<input type="text" name="dusun" required placeholder="contoh: Krajan"><span class="err"></span></label>
+          <label>RT/RW<input type="text" name="rt_rw" required placeholder="02/04"><span class="err"></span></label>
+          <label>Nama Kepala Keluarga<input type="text" name="nama_kk" required><span class="err"></span></label>
         </div>
-
         <div class="grid-3">
-          <label>No. HP (opsional)
-            <input type="tel" name="hp" />
-            <span class="err"></span>
-          </label>
-          <label>Nama Berkas Foto (opsional)
-            <input type="text" name="foto_rumah" placeholder="mis: IMG_1234.jpg" />
-            <span class="err"></span>
-          </label>
-          <label>Tanggal Pendataan
-            <input type="date" name="tgl" />
-            <span class="err"></span>
-          </label>
+          <label>NIK (opsional)<input type="text" name="nik" pattern="\d{16}" placeholder="16 digit"><span class="err"></span></label>
+          <label>Jumlah anggota<input type="number" name="jml_anggota" min="1" required><span class="err"></span></label>
+          <label>No. HP (opsional)<input type="tel" name="hp"><span class="err"></span></label>
+        </div>
+        <div class="grid-3">
+          <label>Nama berkas foto (opsional)<input type="text" name="foto_rumah" placeholder="IMG_1234.jpg"><span class="err"></span></label>
+          <label>Tanggal pendataan<input type="date" name="tgl"><span class="err"></span></label>
+          <label style="align-self:end"><button type="button" id="btnGPS">Ambil Koordinat</button></label>
         </div>
 
         <fieldset>
           <legend>Lokasi (GPS)</legend>
           <div class="grid-3">
-            <label>Latitude
-              <input type="text" name="lat" id="lat" readonly />
-            </label>
-            <label>Longitude
-              <input type="text" name="lng" id="lng" readonly />
-            </label>
-            <label>Akurasi (m)
-              <input type="text" name="acc" id="acc" readonly />
-            </label>
-          </div>
-          <div class="row">
-            <button type="button" id="btnGPS">Ambil Koordinat</button>
-            <small class="muted">Izin lokasi diperlukan. Jika ditolak, isi manual.</small>
+            <label>Latitude<input type="text" name="lat" id="lat" readonly></label>
+            <label>Longitude<input type="text" name="lng" id="lng" readonly></label>
+            <label>Akurasi (m)<input type="text" name="acc" id="acc" readonly></label>
           </div>
           <div id="mapWrap"><div id="map"></div></div>
         </fieldset>
 
-        <hr/>
+        <hr>
 
-        <h2>Pengisian Indikator (otomatis dihitung)</h2>
-        <p class="muted">Isi setiap indikator dalam skala <strong>0–100</strong>. Kosongkan jika tidak relevan.</p>
-
-        <h3>1. Layanan Dasar</h3>
-        <div class="grid-4">
-          <label>Air minum layak (%)
-            <input type="number" name="ld_air" min="0" max="100" />
-            <span class="err"></span>
+        <h2>Dimensi A — Layanan Dasar (7 indikator)</h2>
+        <div class="grid-2">
+          <label>A1. Akses air minum
+            <select name="a1_air">
+              <option value="">--Pilih--</option>
+              <option value="layak">Ada & Layak</option>
+              <option value="tidak_layak">Ada tapi Tidak Layak</option>
+              <option value="tidak_ada">Tidak Ada</option>
+            </select><span class="err"></span>
           </label>
-          <label>Sanitasi layak (%)
-            <input type="number" name="ld_sanitasi" min="0" max="100" />
-            <span class="err"></span>
+          <label>A2. Akses sanitasi
+            <select name="a2_sanitasi">
+              <option value="">--Pilih--</option>
+              <option value="layak">Ada & Layak</option>
+              <option value="tidak_layak">Ada tapi Tidak Layak</option>
+              <option value="tidak_ada">Tidak Ada</option>
+            </select><span class="err"></span>
           </label>
-          <label>Rumah berlistrik (%)
-            <input type="number" name="ld_listrik" min="0" max="100" />
-            <span class="err"></span>
+          <label>A3. Akses listrik
+            <select name="a3_listrik">
+              <option value="">--Pilih--</option>
+              <option value="pln_stabil">PLN stabil / Listrik memadai</option>
+              <option value="pln_tidak">PLN tidak stabil / Non-PLN</option>
+              <option value="tidak_ada">Tidak Ada</option>
+            </select><span class="err"></span>
           </label>
-          <label>Anak 7–18 bersekolah (%)
-            <input type="number" name="ld_sekolah" min="0" max="100" />
-            <span class="err"></span>
+          <label>A4. Kepesertaan JKN
+            <select name="a4_jkn">
+              <option value="">--Pilih--</option>
+              <option value="semua">Mayoritas memiliki JKN</option>
+              <option value="sebagian">Sebagian</option>
+              <option value="tidak">Kebanyakan tidak punya</option>
+            </select><span class="err"></span>
           </label>
-          <label>Kepesertaan JKN (%)
-            <input type="number" name="ld_jkn" min="0" max="100" />
-            <span class="err"></span>
+          <label>A5. Akses pendidikan dasar anak
+            <select name="a5_pendidikan">
+              <option value="">--Pilih--</option>
+              <option value="terjangkau">Terjangkau & tersedia</option>
+              <option value="sulit">Jauh / Sulit</option>
+              <option value="tidak_ada">Tidak ada akses</option>
+            </select><span class="err"></span>
+          </label>
+          <label>A6. Akses layanan kesehatan dasar (posyandu)
+            <select name="a6_posyandu">
+              <option value="">--Pilih--</option>
+              <option value="terjangkau">Ada & terjangkau</option>
+              <option value="sulit">Ada tapi sulit dijangkau</option>
+              <option value="tidak_ada">Tidak ada</option>
+            </select><span class="err"></span>
+          </label>
+          <label>A7. Ketersediaan air bersih publik
+            <select name="a7_pdam">
+              <option value="">--Pilih--</option>
+              <option value="pipa">Pipa/PDAM atau sumber aman</option>
+              <option value="sumur">Sumur terlindungi</option>
+              <option value="lain">Lainnya / tidak aman</option>
+            </select><span class="err"></span>
           </label>
         </div>
 
-        <h3>2. Sosial</h3>
-        <div class="grid-4">
-          <label>Gotong royong (0–100)
-            <input type="number" name="sos_gotong" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Partisipasi Musdes (%)
-            <input type="number" name="sos_musdes" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Keamanan lingkungan (0–100)
-            <input type="number" name="sos_keamanan" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Aktivitas budaya (0–100)
-            <input type="number" name="sos_budaya" min="0" max="100" />
-            <span class="err"></span>
-          </label>
+        <hr>
+        <h2>Dimensi B — Sosial (7 indikator)</h2>
+        <div class="grid-2">
+          <label>B1. Gotong royong aktif
+            <select name="b1_gotong">
+              <option value="">--Pilih--</option><option value="sering">Sering</option><option value="jarang">Jarang</option><option value="tidak">Tidak pernah</option>
+            </select><span class="err"></span></label>
+
+          <label>B2. Partisipasi musdes
+            <select name="b2_musdes"><option value="">--Pilih--</option><option value="ada">Pernah</option><option value="tidak">Tidak</option></select><span class="err"></span></label>
+
+          <label>B3. Ketersediaan PAUD / pendidikan nonformal
+            <select name="b3_paud"><option value="">--Pilih--</option><option value="ada">Ada</option><option value="tidak">Tidak</option></select><span class="err"></span></label>
+
+          <label>B4. Akses kegiatan kesehatan ibu & balita (posyandu)</label>
+          <label style="grid-column:1 / -1"><select name="b4_ibu"><option value="">--Pilih--</option><option value="baik">Baik</option><option value="kurang">Kurang</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+
+          <label>B5. Keanggotaan kelompok (tani/PKK/karang taruna)
+            <select name="b5_kelompok"><option value="">--Pilih--</option><option value="ada">Ada anggota</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+
+          <label>B6. Akses keamanan & ketertiban (polisi/linmas)
+            <select name="b6_keamanan"><option value="">--Pilih--</option><option value="baik">Ada & responsif</option><option value="kurang">Ada tapi lemah</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+
+          <label>B7. Tingkat kerawanan sosial (konflik/permukiman)
+            <select name="b7_rawan"><option value="">--Pilih--</option><option value="rendah">Rendah</option><option value="sedang">Sedang</option><option value="tinggi">Tinggi</option></select><span class="err"></span></label>
         </div>
 
-        <h3>3. Ekonomi</h3>
-        <div class="grid-4">
-          <label>Keragaman usaha (0–100)
-            <input type="number" name="eko_keragaman" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Akses pasar (%)
-            <input type="number" name="eko_pasar" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Akses lembaga keuangan (%)
-            <input type="number" name="eko_keuangan" min="0" max="100" />
-            <span class="err"></span>
-          </label>
+        <hr>
+        <h2>Dimensi C — Ekonomi (7 indikator)</h2>
+        <div class="grid-2">
+          <label>C1. Keragaman produksi/usahatan<br><select name="c1_keragaman"><option value="">--Pilih--</option><option value="tinggi">Beragam (>=3)</option><option value="sedang">2 jenis</option><option value="rendah">1 atau tidak ada</option></select><span class="err"></span></label>
+
+          <label>C2. Akses pasar & pemasaran<br><select name="c2_pasar"><option value="">--Pilih--</option><option value="mudah">Mudah</option><option value="sulit">Sulit</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+
+          <label>C3. Aset/alat produksi memadai<br><select name="c3_aset"><option value="">--Pilih--</option><option value="ya">Ya</option><option value="tidak">Tidak</option></select><span class="err"></span></label>
+
+          <label>C4. Akses ke lembaga keuangan (rekening/koperasi)<br><select name="c4_keu"><option value="">--Pilih--</option><option value="ada">Ada</option><option value="tidak">Tidak</option></select><span class="err"></span></label>
+
+          <label>C5. Akses kredit formal<br><select name="c5_kredit"><option value="">--Pilih--</option><option value="pernah">Pernah</option><option value="tidak">Tidak pernah</option></select><span class="err"></span></label>
+
+          <label>C6. Tenaga kerja & lapangan usaha lokal<br><select name="c6_tk"><option value="">--Pilih--</option><option value="cukup">Cukup</option><option value="kurang">Kurang</option><option value="sedikit">Sedikit</option></select><span class="err"></span></label>
+
+          <label>C7. Infrastruktur ekonomi pendukung (bengkel, pasar desa)<br><select name="c7_infra"><option value="">--Pilih--</option><option value="ada">Ada & berfungsi</option><option value="ada_tidak">Ada tapi lemah</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
         </div>
 
-        <h3>4. Lingkungan</h3>
-        <div class="grid-4">
-          <label>Pengelolaan sampah (0–100)
-            <input type="number" name="ling_sampah" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Air limbah (0–100)
-            <input type="number" name="ling_airlimbah" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>RTH (0–100)
-            <input type="number" name="ling_rth" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Kesiapsiagaan bencana (0–100)
-            <input type="number" name="ling_kesiap" min="0" max="100" />
-            <span class="err"></span>
-          </label>
+        <hr>
+        <h2>Dimensi D — Lingkungan / Ekologi (6 indikator)</h2>
+        <div class="grid-2">
+          <label>D1. Pengelolaan sampah rumah tangga<br><select name="d1_sampah"><option value="">--Pilih--</option><option value="terpilah">Terpilah & diangkut</option><option value="mandiri">Dikelola mandiri</option><option value="sebar">Dibakar/dibuang sembarang</option></select><span class="err"></span></label>
+
+          <label>D2. Pengolahan air limbah domestik (septic/IPAL)<br><select name="d2_airlimbah"><option value="">--Pilih--</option><option value="baik">Ada & berfungsi</option><option value="tidak">Tidak ada / tidak berfungsi</option></select><span class="err"></span></label>
+
+          <label>D3. Kualitas lingkungan (polusi, kebersihan)<br><select name="d3_kualitas"><option value="">--Pilih--</option><option value="baik">Baik</option><option value="cukup">Cukup</option><option value="buruk">Buruk</option></select><span class="err"></span></label>
+
+          <label>D4. Ruang terbuka hijau / vegetasi<br><select name="d4_rth"><option value="">--Pilih--</option><option value="memadai">Memadai</option><option value="kurang">Kurang</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+
+          <label>D5. Potensi bencana lokal (risiko)<br><select name="d5_bencana"><option value="">--Pilih--</option><option value="rendah">Rendah</option><option value="sedang">Sedang</option><option value="tinggi">Tinggi</option></select><span class="err"></span></label>
+
+          <label>D6. Kesiapsiagaan bencana (peta/posko/simulasi)<br><select name="d6_kesiap"><option value="">--Pilih--</option><option value="aktif">Ada & aktif</option><option value="pasif">Ada tapi pasif</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
         </div>
 
-        <h3>5. Aksesibilitas</h3>
-        <div class="grid-4">
-          <label>Akses ke SD (%)
-            <input type="number" name="aks_sd" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Akses ke Puskesmas (%)
-            <input type="number" name="aks_puskesmas" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Akses ke Pasar (%)
-            <input type="number" name="aks_pasar" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Akses ke Kantor Desa (%)
-            <input type="number" name="aks_kantor" min="0" max="100" />
-            <span class="err"></span>
-          </label>
+        <hr>
+        <h2>Dimensi E — Aksesibilitas (3 indikator)</h2>
+        <div class="grid-2">
+          <label>E1. Akses ke SD/MI (waktu/tempuh)<br><select name="e1_sd"><option value="">--Pilih--</option><option value="dekat">Dekat/terjangkau</option><option value="jauh">Jauh</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+          <label>E2. Akses ke Puskesmas/RS<br><select name="e2_pkm"><option value="">--Pilih--</option><option value="dekat">Dekat/terjangkau</option><option value="jauh">Jauh</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+          <label>E3. Akses ke pasar/transportasi utama<br><select name="e3_pasar"><option value="">--Pilih--</option><option value="mudah">Mudah</option><option value="sulit">Sulit</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
         </div>
 
-        <h3>6. Tata Kelola</h3>
-        <div class="grid-4">
-          <label>Transparansi APBDes (0–100)
-            <input type="number" name="tg_transparansi" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Pelaksanaan Musrenbang (0–100)
-            <input type="number" name="tg_musrenbang" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Dokumen RKPDes (0–100)
-            <input type="number" name="tg_rkpdes" min="0" max="100" />
-            <span class="err"></span>
-          </label>
-          <label>Perdes aktif (0–100)
-            <input type="number" name="tg_perdes" min="0" max="100" />
-            <span class="err"></span>
-          </label>
+        <hr>
+        <h2>Dimensi F — Tata Kelola Pemerintahan Desa (8 indikator)</h2>
+        <div class="grid-2">
+          <label>F1. Pelaksanaan musrenbang
+            <select name="f1_musrenbang"><option value="">--Pilih--</option><option value="aktif">Aktif</option><option value="kurang">Ada tapi jarang</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+
+          <label>F2. Adanya RKPDes tersusun
+            <select name="f2_rkpdes"><option value="">--Pilih--</option><option value="ada">Ada & diperbarui</option><option value="lama">Ada tapi kadaluarsa</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+
+          <label>F3. Transparansi APBDes (publikasi)
+            <select name="f3_apbdes"><option value="">--Pilih--</option><option value="terbuka">Terbuka</option><option value="terbatas">Terbatas</option><option value="tidak">Tidak</option></select><span class="err"></span></label>
+
+          <label>F4. Peraturan desa (Perdes) aktif
+            <select name="f4_perdes"><option value="">--Pilih--</option><option value="banyak">Ada & lengkap</option><option value="sedikit">Ada tapi terbatas</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+
+          <label>F5. Keterlibatan masyarakat dalam perencanaan
+            <select name="f5_partisipasi"><option value="">--Pilih--</option><option value="tinggi">Tinggi</option><option value="sedang">Sedang</option><option value="rendah">Rendah</option></select><span class="err"></span></label>
+
+          <label>F6. Pengelolaan aset & inventaris desa
+            <select name="f6_aset"><option value="">--Pilih--</option><option value="baik">Baik</option><option value="kurang">Kurang</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+
+          <label>F7. Mekanisme pengaduan masyarakat
+            <select name="f7_pengaduan"><option value="">--Pilih--</option><option value="aktif">Ada & aktif</option><option value="ada_tidak">Ada tapi pasif</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
+
+          <label>F8. Kapasitas perangkat desa (SDM)
+            <select name="f8_sdm"><option value="">--Pilih--</option><option value="memadai">Memadai</option><option value="kurang">Kurang</option><option value="tidak">Tidak ada</option></select><span class="err"></span></label>
         </div>
 
         <div class="actions">
@@ -215,10 +215,11 @@
           <button type="reset" class="secondary">Reset Form</button>
         </div>
       </form>
-      <div id="resultBox" class="card" style="margin-top:12px;display:none"></div>
+
+      <div id="resultBox" class="card" style="display:none;margin-top:12px"></div>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container"><small>© 2025 Desa Kebon Rejo — Helpdesk IDM Kebonrejo v4</small></div></footer>
+  <footer class="site-footer"><div class="container"><small>© 2025 Desa Kebon Rejo — Helpdesk IDM Kebonrejo (Full 38 Indikator)</small></div></footer>
 </body>
 </html>
