@@ -1,4 +1,4 @@
-/* Helpdesk IDM Kebonrejo v3 - style.css */
+/* Helpdesk IDM Kebonrejo - style.css */
 :root{
   --bg:#0b1220;
   --card:#11182b;
@@ -10,13 +10,12 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.5}
-.container{max-width:1200px;margin:0 auto;padding:16px}
+.container{max-width:1100px;margin:0 auto;padding:16px}
 .site-header{background:linear-gradient(90deg,#0f172a,#111827);border-bottom:1px solid #1f2937}
 .site-header h1{margin:.2rem 0}
-.site-header .tag{font-size:.8rem;background:#0b3561;border:1px solid #234766;border-radius:999px;padding:2px 8px;margin-left:8px}
 .site-header p{margin:0;color:var(--muted)}
 .card{background:var(--card);padding:16px;margin:16px 0;border:1px solid #1f2937;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-h2{margin-top:16px}
+h2{margin-top:0}
 label{display:flex;flex-direction:column;gap:6px;font-size:.95rem}
 input,select,button{padding:10px;border-radius:10px;border:1px solid #2b3548;background:#0b1220;color:var(--text)}
 input[readonly]{opacity:.8}
@@ -30,10 +29,9 @@ button#btnClear{background:#4a1111;border-color:#6b1a1a}
 button.secondary{background:#2a2a2a}
 fieldset{border:1px dashed #334155;border-radius:12px;padding:12px;margin:12px 0}
 legend{padding:0 8px;color:var(--accent)}
-.grid-2,.grid-3,.grid-4{display:grid;gap:12px}
+.grid-2,.grid-3{display:grid;gap:12px}
 .grid-2{grid-template-columns:repeat(2,1fr)}
 .grid-3{grid-template-columns:repeat(3,1fr)}
-.grid-4{grid-template-columns:repeat(4,1fr)}
 .row{display:flex;align-items:center;gap:12px}
 .actions{display:flex;gap:12px;flex-wrap:wrap}
 .table-scroll{overflow:auto;border:1px solid #1f2937;border-radius:12px}
@@ -42,15 +40,12 @@ thead th, tbody td{padding:8px 10px;border-bottom:1px solid #1f2937;white-space:
 tbody tr:hover{background:#0f172a}
 .muted{color:var(--muted)}
 .site-footer{border-top:1px solid #1f2937;background:#0f172a;color:var(--muted)}
-#mapWrap{margin-top:12px;border:1px solid #1f2937;border-radius:12px;overflow:hidden}
-#map{height:300px}
-.err{color:#fca5a5;font-size:.8rem;min-height:1em}
-.invalid input{border-color:#ef4444;outline-color:#ef4444}
-@media (max-width:1100px){
-  .grid-4{grid-template-columns:1fr 1fr}
-}
-@media (max-width:800px){
-  .grid-4{grid-template-columns:1fr}
+@media (max-width:900px){
   .grid-3{grid-template-columns:1fr}
   .grid-2{grid-template-columns:1fr}
 }
+
+#mapWrap{margin-top:12px;border:1px solid #1f2937;border-radius:12px;overflow:hidden}
+#map{height:300px}
+.err{color:#fca5a5;font-size:.8rem;min-height:1em}
+.invalid input, .invalid select{border-color:#ef4444;outline-color:#ef4444}

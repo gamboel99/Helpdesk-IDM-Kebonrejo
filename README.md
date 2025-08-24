@@ -1,26 +1,18 @@
-# Helpdesk IDM Kebonrejo v3 (Versi Ringan 6 Dimensi)
+# Helpdesk IDM Kebonrejo (Offline) – v2
 
-Aplikasi formulir **offline** untuk penggalian data **IDM 2025** di Desa Kebon Rejo, Kec. Kepung, Kab. Kediri.
+Pembaharuan:
+- **Peta (Leaflet)**: pratinjau titik koordinat. Klik pada peta untuk mengubah lat/lng. (Memerlukan internet untuk tiles)
+- **Validasi**: penandaan kolom wajib & kesalahan (mis. NIK harus 16 digit).
+- **Skoring sederhana**: skor per dimensi (Sosial, Ekonomi, Lingkungan) + total (0–100). *Catatan: indikatif, bukan penetapan resmi Kemendesa.*
+- **Sheet Skoring** di Excel berisi ringkasan aturan & bobot (dapat disesuaikan di `script.js` pada variabel `weights`).
 
-## Pembaruan v3
-- Form 6 dimensi (Layanan Dasar, Sosial, Ekonomi, Lingkungan, Aksesibilitas, Tata Kelola).
-- Semua indikator dimasukkan sebagai **angka 0–100** (versi ringan).
-- **Skor otomatis** per dimensi = rata-rata indikator pada dimensi tsb. **Skor total** = rata-rata 6 dimensi yang terisi.
-- **Excel**: Sheet *Data IDM*, *Rekap Dimensi*, dan *Panduan*.
-- **Peta** (Leaflet) untuk pratinjau koordinat (opsional, perlu internet untuk tiles).
+## Tetap Offline
+- Aplikasi dapat berjalan murni offline. Peta akan kosong saat offline—ini normal. Fitur form & ekspor Excel tetap berfungsi.
 
-## Cara Pakai (Offline)
-1. Buka `index.html` di peramban modern.
-2. Isi identitas, ambil koordinat, lengkapi indikator (0–100).
-3. Klik **Tambahkan ke Tabel** (bisa banyak entri).
-4. Klik **Download Excel** → `data_idm_kebonrejo_v3.xlsx` akan diunduh.
+## Cara Pakai
+1. Buka `index.html`, klik **Ambil Koordinat** atau klik peta untuk set lokasi.
+2. Isi form → **Tambahkan ke Tabel** (multi entri).
+3. **Download Excel** untuk menyimpan semua data, termasuk skor.
 
-## Deploy ke GitHub + Vercel
-- Repo GitHub: unggah seluruh isi folder ini.
-- Vercel: Import repo → Framework **Other/Static** → tanpa build command → deploy.
-
-## Catatan Penting
-- Skor versi ringan ini **indikatif**. Untuk pelaporan resmi, sesuaikan indikator/nama/rumus agar sesuai **Juknis Kemendesa** terbaru.
-- Data tidak dikirim ke server mana pun; hanya tersimpan di perangkat hingga diekspor.
-
-MIT © 2025 Pemerintah Desa Kebon Rejo
+## Penafian
+- **Skoring** di versi ini adalah pendekatan praktis berbasis aturan umum indikator; untuk pelaporan resmi, sesuaikan bobot & aturan dengan juknis Kemendesa terbaru.
